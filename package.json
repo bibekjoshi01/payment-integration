@@ -16,9 +16,9 @@
     "client-dev": "vite",
     "client-build": "vite build",
     "client-preview": "vite preview",
-    "server-dev": "nodemon server/server.js",
+    "server-dev": "nodemon node_server/server.js",
     "start": "concurrently \"npm run client-dev\" \"npm run server-dev\"",
-    "prod": "npm run client-build && node server/server.js",
+    "prod": "npm run client-build && node node_server/server.js",
     "format": "npx prettier --write **/*.{js,jsx,md}",
     "format:check": "npx prettier --check **/*.{js,jsx,md}"
   },
