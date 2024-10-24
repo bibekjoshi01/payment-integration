@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Full width */
+  max-width: max-content;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 8px;
+}
+
+.PayPalButtons {
+  width: 100%; /* Full width for PayPal Buttons */
+}
+
+.Message {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
+}

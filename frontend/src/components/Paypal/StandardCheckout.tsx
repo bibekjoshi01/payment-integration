@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./StandardCheckout.css";
 import {
   PayPalScriptProvider,
   PayPalButtons,
@@ -11,19 +12,24 @@ function Message({ content }) {
   return <p>{content}</p>;
 }
 
-function PayPal() {
-  const BASE_URL = "http://localhost:8000"
+function PaypalStandardCheckout() {
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   /**
    * @see Complete JS SDK Info: https://developer.paypal.com/sdk/js/reference/
    */
-
   const initialOptions: ReactPayPalScriptOptions = {
-    clientId:
-      "Ab5FpjAckC4yLes5rHjDIOxosZEbp6laV3DQukgYXRt_hyV4hbd-vXLsejnBtZvTlAsS2MJPsxz_OLlF",
-    "enable-funding": "paylater,venmo",
-    "data-sdk-integration-source": "integrationbuilder_sc",
+    clientId: "test",
+    "enable-funding": "venmo",
+    "disable-funding": "",
+    "buyer-country": "US",
+    currency: "USD",
+    "data-page-type": "product-details",
+    components: "buttons",
+    "data-sdk-integration-source": "developer-studio",
   };
+
+  const [message, setMessage] = useState("");
 
   const createOrder: PayPalButtonsComponentProps["createOrder"] = async () => {
     try {
@@ -37,8 +43,8 @@ function PayPal() {
         body: JSON.stringify({
           cart: [
             {
-              id: "YOUR_PRODUCT_ID",
-              quantity: "YOUR_PRODUCT_QUANTITY",
+              id: "1", // product id
+              quantity: "5",
             },
           ],
         }),
@@ -122,10 +128,8 @@ function PayPal() {
     window.location.assign("/your-error-page-here");
   };
 
-  const [message, setMessage] = useState("");
-
   return (
-    <div className="App">
+    <div className="container">
       <PayPalScriptProvider options={initialOptions}>
         <PayPalButtons
           /**
@@ -133,8 +137,9 @@ function PayPal() {
            */
           style={{
             shape: "rect",
-            // color:'blue', // change the default color of the buttons
-            layout: "vertical", //default value. Can be changed to horizontal
+            layout: "vertical",
+            color: "gold",
+            label: "paypal",
           }}
           createOrder={createOrder}
           onApprove={onApprove}
@@ -147,4 +152,4 @@ function PayPal() {
   );
 }
 
-export default PayPal;
+export default PaypalStandardCheckout;
