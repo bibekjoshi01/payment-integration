@@ -1,0 +1,24 @@
+python-slugify==8.0.4
+Pillow==10.3.0
+argon2-cffi==23.1.0
+python-dateutil
+# Django
+# ------------------------------------------------------------------------------
+django==4.2
+django-environ==0.10.0
+django-model-utils==4.5.0
+django-redis==5.4.0
+django-mptt==0.16.0
+django-filter==24.2
+psycopg2-binary==2.9.1
+# Django REST Framework
+djangorestframework==3.15.1
+django-cors-headers==4.3.1
+djangorestframework-camel-case==1.4.2
+djangorestframework-simplejwt==5.3.1
+# DRF-spectacular for api documentation
+drf-spectacular==0.27.2
+drf-nested-forms==1.1.8
+# Other Dependencies
+requests==2.28.2
+stripe>=5.0.0

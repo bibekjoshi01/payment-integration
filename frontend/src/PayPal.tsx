@@ -66,6 +66,7 @@ function PayPal() {
     data,
     actions
   ) => {
+    console.log(data, "data..........->>>>>>>>>>");
     try {
       const response = await fetch(
         `${BASE_URL}/api/orders/${data.orderID}/capture`,
