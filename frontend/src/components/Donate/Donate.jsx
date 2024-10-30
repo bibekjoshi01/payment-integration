@@ -1,5 +1,4 @@
-import React from "react";
-import "./Donate.css"; // Add CSS styling in a separate file
+import "./Donate.css"; 
 
 const Donate = () => {
   const redirectToLink = (link) => {
