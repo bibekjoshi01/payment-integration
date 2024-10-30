@@ -12,7 +12,7 @@ function StripeSubscription() {
     const fetchSubscriptionPlans = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/subscription-app/subscription-plans"
+          "http://localhost:8000/api/v1/public/subscription-app/subscription-plans"
         );
         setData(response.data.results); 
       } catch (error) {
@@ -32,20 +32,21 @@ function StripeSubscription() {
 
     axios
       .post(
-        "http://localhost:8000/api/subscription-app/subscribe",
+        "http://localhost:8000/api/v1/public/subscription-app/subscribe-plan",
         {
-          subscription_plan: planId,
-          user: "1", // static user id
+          subscription_plan: "a6a0159c-b2b4-4f94-8136-5610304621f7",
+          user: "f0b51ec9-260a-4d45-bb41-1abd53e6bd4e", // static user id
+          paymentMethod: "STRIPE"
         },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNTI3ODAyLCJpYXQiOjE3Mjk2NjM4MDIsImp0aSI6IjQxYWNmM2Q0ZDE5MzQzYzA4ZjQ4YTQ3NDdmMGY1MTZlIiwidXNlcl9pZCI6MX0.vsNeR82VsmXyAoAscawc9jnC64n2Xdd6KqPduVNk2es`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNjI5MjE4LCJpYXQiOjE3MzAwMjQ0MTgsImp0aSI6ImQxMDQ4MWNkNzI0ZDQ3ZTM4ZjFiMzZiYjNmZmQxZDNlIiwidXNlcl9pZCI6M30.7Fe2ufJPO8k6aIf-GnotOZhR5wyg1yUmET-w0PostRE`,
           },
         }
       )
       .then((response) => {
-        const sessionId = response.data.session_id;
+        const sessionId = response.data.sessionId;
 
         // Redirect to Stripe Checkout page
         stripePromise.then((stripe) => {

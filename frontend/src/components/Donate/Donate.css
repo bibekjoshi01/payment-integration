@@ -1,0 +1,58 @@
+.donate-container {
+  text-align: center;
+  padding: 20px;
+  max-width: max-content;
+  margin: auto;
+}
+
+.donate-header {
+  font-size: 2em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.donate-description {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.btn.paypal {
+  background-color: #0070ba;
+}
+
+.btn.paypal:hover {
+  background-color: #005f9e;
+}
+
+.btn.stripe {
+  background-color: #6772e5;
+}
+
+.btn.stripe:hover {
+  background-color: #555abf;
+}
+
+.btn.fw {
+  background-color: #b38900;
+}
+
+.btn.fw:hover {
+  background-color: #967300;
+}

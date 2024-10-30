@@ -18,12 +18,15 @@ const SuccessPage = () => {
   const retrieveStripeSession = async (sessionId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/subscription-app/verify/${sessionId}`,
+        `http://localhost:8000/api/v1/public/subscription-app/subscription/${sessionId}/capture`,
         {
-          method: "GET",
+          method: "POST",
+          body: JSON.stringify({
+            paymentMethod: "STRIPE",
+          }),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNTI3ODAyLCJpYXQiOjE3Mjk2NjM4MDIsImp0aSI6IjQxYWNmM2Q0ZDE5MzQzYzA4ZjQ4YTQ3NDdmMGY1MTZlIiwidXNlcl9pZCI6MX0.vsNeR82VsmXyAoAscawc9jnC64n2Xdd6KqPduVNk2es`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNDUyNjMxLCJpYXQiOjE3Mjk4NDc4MzEsImp0aSI6ImQ5Y2Q4M2FhODdlMTQ3MTQ5ODlmZGM4ODk5NDczMTk3IiwidXNlcl9pZCI6M30._kRS0eq1KBEEOnf8NaK1aULGLnY4AImCiulfaCr11Yg`,
           },
         }
       );
@@ -31,13 +34,13 @@ const SuccessPage = () => {
       if (response.ok) {
         const sessionDetails = await response.json();
         console.log("Session Details:", sessionDetails);
-        setMessage("Payment Successfull!")
+        setMessage("Payment Successfull!");
       } else {
         console.error("Failed to retrieve session details");
-        setMessage("Payment Failed!")
+        setMessage("Payment Failed!");
       }
     } catch (error) {
-      setMessage("Opps Something went wrong !")
+      setMessage("Opps Something went wrong !");
       console.error("Error fetching session details:", error);
     }
   };
