@@ -37,7 +37,7 @@ def get_or_create_stripe_customer(user):
             # Create a new Stripe customer if not found or no customer ID
             customer = stripe.Customer.create(
                 email=user.email,
-                name=user.get_full_name(),
+                name=user.get_full_name,
             )
             user.stripe_customer_id = customer["id"]
             user.save()
