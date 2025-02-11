@@ -1,5 +1,5 @@
 """
-Django settings for dj_server project.
+Django settings for payment gateway project.
 """
 
 from pathlib import Path
@@ -180,3 +180,4 @@ LOGGING = {
 
 # Constants
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")

@@ -1,21 +1,25 @@
 import "./App.css";
-import StripeCheckout from "./components/Stripe/Stripe";
-import PaypalStandardCheckout from "./components/Paypal/StandardCheckout";
-import Cart from "./components/Cart";
+import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
+import PayStack from "./pages/PayStack";
+import PayStackPaymentCallback from "./pages/PayStackPaymentCallback";
 
 const App = () => {
   return (
-    <div className="main">
-      <div className="cart">
-        <h2>My Cart</h2>
-        <Cart />
-      </div>
-      <div className="payment">
-        <h2>Checkout</h2>
-        <PaypalStandardCheckout />
-        <StripeCheckout />
-      </div>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/paystack" element={<PayStack />} />
+          <Route
+            path="/paystack-callback"
+            element={<PayStackPaymentCallback />}
+          />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   );
 };
 
