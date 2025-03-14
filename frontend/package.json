@@ -12,10 +12,12 @@
   "dependencies": {
     "@paypal/react-paypal-js": "^8.7.0",
     "@paystack/inline-js": "^2.22.2",
+    "@react-oauth/google": "^0.12.1",
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.9.0",
     "axios": "^1.7.7",
     "flutterwave-react-v3": "^1.3.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
