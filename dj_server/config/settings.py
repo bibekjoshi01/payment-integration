@@ -13,13 +13,10 @@ environ.Env.read_env(str(BASE_DIR / ".env"))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^*9n3j1okjbz84bembz3s_$*^1)o4c0rsorw^&=y5#gtaf7t!q"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOW_ALL_ORIGINS = True
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='local-payment-demo-only-change-before-deployment')
+DEBUG = env.bool('DJANGO_DEBUG', default=True)
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', '127.0.0.1', 'testserver'])
+CORS_ALLOWED_ORIGINS = [env('FRONTEND_BASE_URL', default='http://localhost:5173')]
 
 # Application definition
 
@@ -35,6 +32,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "user",
     "subscription",
+    "checkout",
 ]
 
 MIDDLEWARE = [
@@ -76,7 +74,7 @@ AUTH_USER_MODEL = "user.User"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "payment-demo.sqlite3",
     }
 }
 
@@ -179,6 +177,29 @@ LOGGING = {
 }
 
 # Constants
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
-PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY")
-FRONTEND_BASE_URL = env("FRONTEND_BASE_URL")
+STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="")
+PAYSTACK_SECRET_KEY = env("PAYSTACK_SECRET_KEY", default="")
+FRONTEND_BASE_URL = env("FRONTEND_BASE_URL", default="http://localhost:5173").rstrip("/")
+
+from django.core.exceptions import ImproperlyConfigured
+
+PAYMENT_MODE = env('PAYMENT_MODE', default='mock')
+if PAYMENT_MODE not in {'mock', 'sandbox'}:
+    raise ImproperlyConfigured('PAYMENT_MODE must be mock or sandbox. Live payments are disabled.')
+FRONTEND_BASE_URL = env('FRONTEND_BASE_URL', default='http://localhost:5173').rstrip('/')
+PROVIDER_TIMEOUT = 15
+PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID', default='')
+PAYPAL_CLIENT_SECRET = env('PAYPAL_CLIENT_SECRET', default='')
+PAYPAL_WEBHOOK_ID = env('PAYPAL_WEBHOOK_ID', default='')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY', default='')
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET', default='')
+PAYSTACK_SECRET_KEY = env('PAYSTACK_SECRET_KEY', default='')
+FLUTTERWAVE_SECRET_KEY = env('FLUTTERWAVE_SECRET_KEY', default='')
+FLUTTERWAVE_WEBHOOK_SECRET = env('FLUTTERWAVE_WEBHOOK_SECRET', default='')
+# v3 accounts commonly send verif-hash; newer accounts can use HMAC SHA256.
+FLUTTERWAVE_WEBHOOK_STYLE = env('FLUTTERWAVE_WEBHOOK_STYLE', default='verif-hash')
+if FLUTTERWAVE_WEBHOOK_STYLE not in {'verif-hash', 'hmac'}:
+    raise ImproperlyConfigured('FLUTTERWAVE_WEBHOOK_STYLE must be verif-hash or hmac.')
+
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 256 * 1024
