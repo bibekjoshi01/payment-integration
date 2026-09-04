@@ -305,3 +305,9 @@ src/media/
 .env
 .envs/*
 !.envs/.local/
+
+# Local checkout data and browser test output
+*.sqlite3
+*.sqlite3-journal
+playwright-report/
+test-results/
