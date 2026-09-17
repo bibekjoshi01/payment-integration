@@ -9,13 +9,7 @@ payment_logger = logging.getLogger("payment_logger")
 payment_logger.setLevel(logging.ERROR)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
-# File handler for logging to a file
-file_handler = logging.FileHandler("logs/payment_logs.log")
-file_handler.setLevel(logging.ERROR)
-file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
-payment_logger.addHandler(file_handler)
+# Use Django logging; importing this module must not depend on the working directory.
 
 
 def get_or_create_stripe_customer(user):

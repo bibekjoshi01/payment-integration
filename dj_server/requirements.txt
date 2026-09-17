@@ -9,3 +9,4 @@ djangorestframework-simplejwt>=5.5,<6
 djangorestframework-camel-case>=1.4,<2
 django-cors-headers>=4.7,<5
 django-filter>=25.1,<26
+python-dateutil>=2.9,<3
