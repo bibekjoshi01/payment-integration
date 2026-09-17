@@ -5,14 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-# Constants
-PAYPAL_CLIENT_ID = (
-    "Ab5FpjAckC4yLes5rHjDIOxosZEbp6laV3DQukgYXRt_hyV4hbd-vXLsejnBtZvTlAsS2MJPsxz_OLlF"
-)
-PAYPAL_CLIENT_SECRET = (
-    "EBGcjmS-HiULGQCsNEhyKLJUoVbTI_Dop5GWrFAzWOzSgH4DtpOHnB5Kg-DlrtGWvJadkM_HlvsbF080"
-)
-PAYPAL_BASE_URL = "https://api.sandbox.paypal.com"
+from django.conf import settings
+
+PAYPAL_BASE_URL = 'https://api-m.sandbox.paypal.com'
 
 
 class PaypalAPIView(APIView):
@@ -24,14 +19,15 @@ class PaypalAPIView(APIView):
 
     def generate_access_token(self):
         try:
-            if not PAYPAL_CLIENT_ID or not PAYPAL_CLIENT_SECRET:
+            if not settings.PAYPAL_CLIENT_ID or not settings.PAYPAL_CLIENT_SECRET:
                 raise ValueError("MISSING_API_CREDENTIALS")
 
             auth = b64encode(
-                f"{PAYPAL_CLIENT_ID}:{PAYPAL_CLIENT_SECRET}".encode()
+                f"{settings.PAYPAL_CLIENT_ID}:{settings.PAYPAL_CLIENT_SECRET}".encode()
             ).decode("utf-8")
             response = requests.post(
                 f"{PAYPAL_BASE_URL}/v1/oauth2/token",
+                timeout=settings.PROVIDER_TIMEOUT,
                 data={
                     "grant_type": "client_credentials",
                 },
@@ -107,6 +103,7 @@ class CreateOrderView(PaypalAPIView):
 
         response = requests.post(
             url,
+            timeout=settings.PROVIDER_TIMEOUT,
             json=payload,
             headers={
                 "Content-Type": "application/json",
@@ -142,6 +139,7 @@ class CaptureOrderView(PaypalAPIView):
 
         response = requests.post(
             url,
+            timeout=settings.PROVIDER_TIMEOUT,
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {access_token}",
