@@ -74,7 +74,7 @@ AUTH_USER_MODEL = "user.User"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "payment-demo.sqlite3",
+        "NAME": BASE_DIR / env("PAYMENT_DB_NAME", default="payment-demo.sqlite3"),
     }
 }
 
@@ -196,10 +196,6 @@ STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET', default='')
 PAYSTACK_SECRET_KEY = env('PAYSTACK_SECRET_KEY', default='')
 FLUTTERWAVE_SECRET_KEY = env('FLUTTERWAVE_SECRET_KEY', default='')
 FLUTTERWAVE_WEBHOOK_SECRET = env('FLUTTERWAVE_WEBHOOK_SECRET', default='')
-# v3 accounts commonly send verif-hash; newer accounts can use HMAC SHA256.
-FLUTTERWAVE_WEBHOOK_STYLE = env('FLUTTERWAVE_WEBHOOK_STYLE', default='verif-hash')
-if FLUTTERWAVE_WEBHOOK_STYLE not in {'verif-hash', 'hmac'}:
-    raise ImproperlyConfigured('FLUTTERWAVE_WEBHOOK_STYLE must be verif-hash or hmac.')
 
 MAX_UPLOAD_SIZE = 5 * 1024 * 1024
 DATA_UPLOAD_MAX_MEMORY_SIZE = 256 * 1024
