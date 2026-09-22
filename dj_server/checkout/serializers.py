@@ -12,7 +12,7 @@ class CheckoutInput(serializers.Serializer):
     def to_internal_value(self, data):
         # Reject client prices or misspelled fields instead of silently ignoring them.
         if not isinstance(data, dict) or set(data) - set(self.fields):
-            raise serializers.ValidationError('Send only gateway, product and email.')
+            raise serializers.ValidationError({'non_field_errors': ['Send only gateway, product and email.']})
         return super().to_internal_value(data)
 
 
