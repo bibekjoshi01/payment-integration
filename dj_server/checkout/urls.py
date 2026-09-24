@@ -1,7 +1,15 @@
 from django.urls import path
 
+from .paypal import CaptureOrderView, CreateOrderView
 from .paystack import PayStackInitializePaymentView, PayStackVerifyPaymentView
-from .paypal import CreateOrderView, CaptureOrderView
+from .views import (
+    ConfigView,
+    PaymentCreateView,
+    PaymentDetailView,
+    PaymentSimulateView,
+    PaymentVerifyView,
+)
+from .webhooks import WebhookView
 
 urlpatterns = [
     # PayStack
@@ -25,14 +33,23 @@ urlpatterns = [
 ]
 
 # Shared one-time checkout API. Legacy URLs above remain available.
-from .views import ConfigView, PaymentCreateView, PaymentDetailView, PaymentVerifyView, PaymentSimulateView
-from .webhooks import WebhookView
+
 
 urlpatterns += [
-    path('config', ConfigView.as_view(), name='checkout-config'),
-    path('payments', PaymentCreateView.as_view(), name='payment-create'),
-    path('payments/<uuid:payment_id>', PaymentDetailView.as_view(), name='payment-detail'),
-    path('payments/<uuid:payment_id>/verify', PaymentVerifyView.as_view(), name='payment-verify'),
-    path('payments/<uuid:payment_id>/simulate', PaymentSimulateView.as_view(), name='payment-simulate'),
-    path('webhooks/<str:gateway>', WebhookView.as_view(), name='payment-webhook'),
+    path("config", ConfigView.as_view(), name="checkout-config"),
+    path("payments", PaymentCreateView.as_view(), name="payment-create"),
+    path(
+        "payments/<uuid:payment_id>", PaymentDetailView.as_view(), name="payment-detail"
+    ),
+    path(
+        "payments/<uuid:payment_id>/verify",
+        PaymentVerifyView.as_view(),
+        name="payment-verify",
+    ),
+    path(
+        "payments/<uuid:payment_id>/simulate",
+        PaymentSimulateView.as_view(),
+        name="payment-simulate",
+    ),
+    path("webhooks/<str:gateway>", WebhookView.as_view(), name="payment-webhook"),
 ]
