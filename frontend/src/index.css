@@ -1,1 +1,106 @@
-:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#18312e;background:#f5f7f5;font-synthesis:none;text-rendering:optimizeLegibility;font-weight:400;line-height:1.6}*{box-sizing:border-box}body{margin:0}a{color:#076459;text-underline-offset:4px}button,input{font:inherit}button,.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 20px;border:1px solid #becbc6;border-radius:8px;background:#fff;color:#18312e;cursor:pointer;text-decoration:none;font-weight:600}button:disabled{opacity:.55;cursor:wait}button:hover:not(:disabled),.button:hover{border-color:#087b68;background:#edf7f2}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #dfab48;outline-offset:4px}h1,h2,h3{line-height:1.2;letter-spacing:-.035em}h1{font-size:clamp(2rem,4vw,3rem);margin:12px 0 16px}h2{font-size:1.2rem;margin:0 0 22px}h3{font-size:1rem}p{color:#5f726b}input[type=email]{width:100%;border:1px solid #bbc9c2;border-radius:8px;padding:12px 14px;background:#fcfdfc;color:inherit;margin-top:8px}label{font-weight:500}hr{border:0;border-top:1px solid #e1e9e3;margin:26px 0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #18312e;
+  background: #f5f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
+  line-height: 1.6;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+a {
+  color: #076459;
+  text-underline-offset: 4px;
+}
+button,
+input {
+  font: inherit;
+}
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 20px;
+  border: 1px solid #becbc6;
+  border-radius: 8px;
+  background: #fff;
+  color: #18312e;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+button:hover:not(:disabled),
+.button:hover {
+  border-color: #087b68;
+  background: #edf7f2;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #dfab48;
+  outline-offset: 4px;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 12px 0 16px;
+}
+h2 {
+  font-size: 1.2rem;
+  margin: 0 0 22px;
+}
+h3 {
+  font-size: 1rem;
+}
+p {
+  color: #5f726b;
+}
+input[type="email"] {
+  width: 100%;
+  border: 1px solid #bbc9c2;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fcfdfc;
+  color: inherit;
+  margin-top: 8px;
+}
+label {
+  font-weight: 500;
+}
+hr {
+  border: 0;
+  border-top: 1px solid #e1e9e3;
+  margin: 26px 0;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
