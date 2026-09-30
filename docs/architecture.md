@@ -9,7 +9,7 @@
 - `frontend/src/checkout/` — checkout form, result page, simulator and API client.
 - [API examples](api.md) — requests you can run with curl.
 
-The original auth, subscription and frontend prototypes remain in `dj_server/user`, `dj_server/subscription`, `frontend/src/components` and `frontend/src/pages` for reference. The new UI uses only `frontend/src/checkout`. Existing backend routes are retained for compatibility; use `/api/checkout/payments` for this example. The original tracked `db.sqlite3` is preserved; the running demo uses a new ignored `payment-demo.sqlite3`.
+The original auth, subscription and frontend prototypes remain in `dj_server/user`, `dj_server/subscription`, `frontend/src/components` and `frontend/src/pages` for reference. The new UI uses only `frontend/src/checkout`. Existing backend routes are retained for compatibility; use `/api/checkout/payments` for this example. SQLite databases are local files excluded from Git; the running demo uses `payment-demo.sqlite3`.
 
 ## How confirmation works
 

@@ -25,7 +25,7 @@ export default function Flutterwave() {
 
   return (
     <div className="Flutterwave">
-      <h1>Hello Test user</h1>
+      <h1>Flutterwave checkout</h1>
 
       <button
         onClick={() => {

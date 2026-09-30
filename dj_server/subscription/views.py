@@ -60,33 +60,33 @@ class SubscriptionPlanListAPIView(generics.ListAPIView):
 
 
 
-WEBHOOK_SECRET = "your_webhook_secret" 
-
 @api_view(['POST'])
 def stripe_webhook(request):
+    if not settings.STRIPE_WEBHOOK_SECRET:
+        return JsonResponse({'error': 'Webhook signing secret is not configured'}, status=503)
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
-    
+
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, WEBHOOK_SECRET
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
         )
-    except ValueError as e:
+    except ValueError:
         return JsonResponse({'error': 'Invalid payload'}, status=400)
-    except stripe.error.SignatureVerificationError as e:
+    except stripe.SignatureVerificationError:
         return JsonResponse({'error': 'Invalid signature'}, status=400)
-    
+
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
-        session = event['data']['object'] 
-        
+        session = event['data']['object']
+
         # Retrieve the user based on the session
         user_subscription = UserSubscription.objects.filter(
             stripe_subscription_id=session.get("id")
         ).first()
-        
+
         if user_subscription:
-            user_subscription.is_active = True 
+            user_subscription.is_active = True
             user_subscription.save()
 
     return JsonResponse({'status': 'success'}, status=200)
